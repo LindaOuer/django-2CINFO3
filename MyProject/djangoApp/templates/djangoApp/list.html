@@ -12,6 +12,7 @@
                 <th>Id</th>
                 <th>Name</th>
                 <th>Age</th>
+                <th>Details</th>
             </tr>
             {% for student in students %}
 
@@ -19,6 +20,7 @@
                 <td>{{ student.id}}</td>
                 <td>{{ student.name}}</td>
                 <td>{{ student.age}}</td>
+                <td> <a href="{% url 'app_detailStudent' student.id %}"> Details </a> </td>
             </tr>
             {% endfor %}
         </table>
