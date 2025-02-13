@@ -2,12 +2,20 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from conferenceApp.models import Conference
 from django.core.exceptions import ValidationError
+from django.core.validators import RegexValidator
 
 # Create your models here.
+def email_validator(value):
+    if not value.endswith("@esprit.tn"):
+        raise ValidationError('Invalid email address, only @esprit.tn are allowed!')
 
 class Participant(AbstractUser):
-    email = models.EmailField(unique=True, max_length=255)
-    cin = models.CharField(primary_key=True, max_length=8)
+    cin_validator = RegexValidator(
+        regex = r'^\d{8}$',
+        message="This field must contain exactly 8 digits"
+    )
+    email = models.EmailField(unique=True, max_length=255, validators=[email_validator])
+    cin = models.CharField(primary_key=True, max_length=8, validators=[cin_validator])
     first_name=models.CharField(max_length=150)
     last_name=models.CharField(max_length=150)
     username=models.CharField(max_length=250, unique=True)
