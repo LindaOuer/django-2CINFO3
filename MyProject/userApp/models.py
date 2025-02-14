@@ -37,7 +37,7 @@ class Participant(AbstractUser):
 class Reservation(models.Model):
     participant = models.ForeignKey(Participant, on_delete=models.CASCADE)
     conference = models.ForeignKey(Conference, on_delete=models.CASCADE)
-    reservation_date = models.DateField(auto_now_add=True)
+    reservation_date = models.DateField()
     confirmed = models.BooleanField(default=False)
     
     def clean(self):
