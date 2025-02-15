@@ -32,6 +32,11 @@
                         class="link-secondary"
                         >details</a
                     >
+                    <br/>
+    <a href="{% url 'conference_updateView' c.id %}"class="link-primary" >Modifier</a>
+    <br/>
+    <a href="{% url 'conference_deleteView' c.id %}" class="link-danger">Supprimer</a>
+
                 </td>
             </tr>
             {% endfor %}
