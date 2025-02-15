@@ -25,6 +25,20 @@
         </p>
         <p><strong>Catégorie:</strong> {{ conference.category.title }}</p>
         <a href="{% url 'conference_listView' %}">Retour à la liste</a>
-        
+        <h3>Reservations:</h3>
+        <ul class="list-group list-group-flush">
+            {% for reservation in reservations %}
+            <li class="list-group-item">
+                {{ reservation.participant.username }} - {{ reservation.reservation_date }} 
+                {% if reservation.confirmed %}
+                (Confirmed) 
+                {% else %} 
+                (Pending) 
+                {% endif %}
+            </li>
+            {% empty %}
+            <li>No reservations found.</li>
+            {% endfor %}
+        </ul>
     </body>
 </html>

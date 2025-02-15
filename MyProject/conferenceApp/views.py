@@ -18,5 +18,10 @@ class ConferenceDetailsView(DetailView):
     model = Conference
     template_name = "conference_detail.html"
     context_object_name = "conference"
-    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        conference = self.get_object()
+        # Récupérer les réservations associées à cette conférence
+        context['reservations'] = Reservation.objects.filter(conference=conference)
+        return context
     
